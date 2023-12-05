@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Vector2 inputVec;
+    public Vector2 inputVec;
     public int speed;
 
     private Rigidbody2D rigid;
@@ -38,8 +36,7 @@ public class Player : MonoBehaviour
     {
         // magnitude : 벡터의 순수한 크기값
         anim.SetFloat("Speed", inputVec.magnitude);
-        Debug.Log(inputVec.magnitude);
-        
+      
         // 키를 입력하지 않았으면 실행되면 안됨
         if(inputVec.x != 0) sprite.flipX = inputVec.x < 0;
     }
