@@ -16,8 +16,6 @@ public class Enemy : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-
-        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -37,5 +35,10 @@ public class Enemy : MonoBehaviour
 
         // # 목표의 X축 값과 자신의 X축 값을 비교하여 작으면 true
         sprite.flipX = target.position.x < rigid.position.x; 
+    }
+
+    private void OnEnable()
+    {
+        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
     }
 }
