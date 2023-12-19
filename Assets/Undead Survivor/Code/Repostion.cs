@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MapRepostion : MonoBehaviour
+public class Repostion : MonoBehaviour
 {
     private Collider2D coll;
 
@@ -21,6 +21,7 @@ public class MapRepostion : MonoBehaviour
         // # 나의 좌표 저장 
         Vector3 myPos = transform.position;
 
+        Vector3 playerDir = GameManager.instance.player.inputVec;
         float dirX = playerPos.x - myPos.x;
         float dirY = playerPos.y - myPos.y;
 
@@ -49,7 +50,7 @@ public class MapRepostion : MonoBehaviour
             case "Enemy":
                 if(coll.enabled)
                 {
-
+                    transform.Translate(playerDir * 20 + new Vector3(Random.Range(-3.0f, 3.0f),0.0f));
                 }
                 break;
         }
