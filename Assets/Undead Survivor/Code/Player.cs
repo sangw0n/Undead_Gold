@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     public int speed;
 
+    public Scanner scanner;
     private Rigidbody2D rigid;
     private SpriteRenderer sprite;
     private Animator anim;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        scanner = GetComponent<Scanner>();
     }
 
     private void Update()

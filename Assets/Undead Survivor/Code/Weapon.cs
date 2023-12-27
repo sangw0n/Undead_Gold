@@ -11,6 +11,12 @@ public class Weapon : MonoBehaviour
     public float speed; // 회전속도
 
     private float timer;
+    private Player player;
+
+    private void Awake()
+    {
+        player = GetComponentInParent<Player>();    
+    }
 
     private void Start()
     {
@@ -26,13 +32,11 @@ public class Weapon : MonoBehaviour
                 break;
             default:
                 timer += Time.deltaTime;
-
                 if(timer > speed)
                 {
                     timer = 0.0f;
                     Fire();
                 }
-
                 break;
 
         }
@@ -59,6 +63,7 @@ public class Weapon : MonoBehaviour
                 break;
 
             default:
+                speed = 0.3f; // 연사속도
                 break;
 
         }
@@ -92,7 +97,22 @@ public class Weapon : MonoBehaviour
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
             // 근접은 관통이 필요없어서 -1 -> 무한
-            bullet.GetComponent<Bullet>().Init(damage, -1);
+            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero);
         }
+    }
+
+    private void Fire()
+    {
+        if (!player.scanner.nearestTarget) return;
+
+        Vector3 targetPos = player.scanner.nearestTarget.position;
+        Vector3 dir = targetPos - transform.position;
+        dir = dir.normalized;
+
+        Transform bullet = GameManager.instance.poolManager.Get(prefabId).transform;
+        bullet.position = transform.position;
+        // 지정된 축을 중심으로 목표를 향해 회전하는 함수
+        bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.GetComponent<Bullet>().Init(damage, count, dir);
     }
 }

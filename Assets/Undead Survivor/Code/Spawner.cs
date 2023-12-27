@@ -34,6 +34,9 @@ public class Spawner : MonoBehaviour
         // Mathf.FloorToInt : 소수점 아래는 버리고 int형으로 바꿔주는 함수 
         // Ex : 10.5 -> 10 (1레벨) / 20.55 -> 20 ( 2레벨)
 
+        // Mathf.Min : 둘 이상의 값 중 가장 작은 값을 반환합니다.
+        // (3,2) -> 2 반환 / (4,5) -> 4반환
+
         // 인덱스 에러 방지
         spawnLevel = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f),  spawnData.Length - 1);
 
