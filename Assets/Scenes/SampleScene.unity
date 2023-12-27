@@ -191,6 +191,7 @@ MonoBehaviour:
     spriteType: 1
     health: 15
     speed: 2.4
+  spawnLevel: 0
 --- !u!1 &35181646
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 181863282408283565, guid: 2f20d1d4c9c977749967d8ebd2ac0c26, type: 3}
+  - {fileID: 824576086854897223, guid: 4fc228cdfa28363448651ef003b0ceef, type: 3}
 --- !u!1 &234192079
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +578,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7.796296
+  orthographic size: 10.472222
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -806,6 +808,55 @@ Transform:
   m_Father: {fileID: 17154929}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &957682224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957682225}
+  - component: {fileID: 957682226}
+  m_Layer: 0
+  m_Name: Weapon 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &957682225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957682224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1596846700}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &957682226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957682224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304b4ec238723a145adfb02466cd950a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  prefabId: 1
+  damage: 15
+  count: 2
+  speed: 0
 --- !u!1 &959237936
 GameObject:
   m_ObjectHideFlags: 0
@@ -14166,6 +14217,7 @@ Transform:
   - {fileID: 1440410761}
   - {fileID: 959237937}
   - {fileID: 17154929}
+  - {fileID: 957682225}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -10,6 +10,8 @@ public class Weapon : MonoBehaviour
     public int count; // 개수
     public float speed; // 회전속도
 
+    private float timer;
+
     private void Start()
     {
         Init();
@@ -23,6 +25,14 @@ public class Weapon : MonoBehaviour
                 transform.Rotate(Vector3.back * speed * Time.deltaTime);
                 break;
             default:
+                timer += Time.deltaTime;
+
+                if(timer > speed)
+                {
+                    timer = 0.0f;
+                    Fire();
+                }
+
                 break;
 
         }
@@ -47,6 +57,7 @@ public class Weapon : MonoBehaviour
                 speed = 150; // 마이너스 -> 시계 방향으로
                 Batch();
                 break;
+
             default:
                 break;
 
@@ -72,6 +83,9 @@ public class Weapon : MonoBehaviour
 
             bullet.localPosition = Vector3.zero;
             bullet.localRotation = Quaternion.identity;
+
+            // index / count 분수로 생각하면 편함
+            // 3개면 1/3 -> 2/3 -> 3/3 이런식으로 계산
 
             Vector3 rotVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(rotVec);
