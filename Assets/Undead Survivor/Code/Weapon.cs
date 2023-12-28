@@ -94,6 +94,7 @@ public class Weapon : MonoBehaviour
 
             Vector3 rotVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(rotVec);
+            // Space.World 를 사용하지 않고 이동시키면 회전 상태에 영향을 받아서 이동
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
             // 근접은 관통이 필요없어서 -1 -> 무한

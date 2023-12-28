@@ -14,6 +14,20 @@ public class Bullet : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
+    private void FixedUpdate()
+    {
+        // 총알이 안 보이면 다시 Pool로 복귀
+        Vector3 bulletPos = transform.position;
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        float diff = Vector3.Distance(bulletPos, playerPos);
+
+        if (diff > 15)
+        {
+            gameObject.SetActive(false);
+        }
+
+    }
+
     public void Init(float damage, int per, Vector3 dir)
     {
         this.damage = damage;
@@ -29,6 +43,7 @@ public class Bullet : MonoBehaviour
     {
         if (!trigger.CompareTag("Enemy") || per == -1) return;
 
+        // 관통
         per--;
         if(per == -1)
         {
