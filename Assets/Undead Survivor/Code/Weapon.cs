@@ -15,12 +15,7 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponentInParent<Player>();    
-    }
-
-    private void Start()
-    {
-        Init();
+        player = GameManager.instance.player;
     }
 
     private void Update()
@@ -40,9 +35,6 @@ public class Weapon : MonoBehaviour
                 break;
 
         }
-
-        // # Test Code
-        if (Input.GetButtonDown("Jump")) LevelUp(20, 5);
     }
 
     public void LevelUp(float damage, int count)
@@ -50,11 +42,32 @@ public class Weapon : MonoBehaviour
         this.damage = damage;
         this.count += count;
 
-        if(id == 0) Batch();
+        if (id == 0) Batch();
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 모든 자식한테 applyGear 적용
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        // Basic Set
+        name = "Weapon " + data.itemId; // Object Name
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property Set
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        // Prefab ID Setting
+        for(int index = 0; index < GameManager.instance.poolManager.prefabs.Length; index++) 
+        {
+            if(data.projecttile == GameManager.instance.poolManager.prefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+
         switch (id)
         {
             case 0:
@@ -67,6 +80,8 @@ public class Weapon : MonoBehaviour
                 break;
 
         }
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 모든 자식한테 applyGear 적용
     }
 
     private void Batch()
