@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameManager.instance.isLive) return;
+
         //anim.GetCurrentAnimatorStateInfo(0).IsName("Hit") : 애니메이션이 실행중인지
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
         
@@ -41,6 +43,8 @@ public class Enemy : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!GameManager.instance.isLive) return;
+
         if (!isLive) return;
 
         // # 목표의 X축 값과 자신의 X축 값을 비교하여 작으면 true

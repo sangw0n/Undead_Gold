@@ -20,6 +20,8 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.instance.isLive) return;
+
         switch (id)
         {
             case 0:
@@ -43,6 +45,7 @@ public class Weapon : MonoBehaviour
         this.count += count;
 
         if (id == 0) Batch();
+           
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 모든 자식한테 applyGear 적용
     }
 
@@ -78,8 +81,12 @@ public class Weapon : MonoBehaviour
             default:
                 speed = 0.3f; // 연사속도
                 break;
-
         }
+
+        // Hand Set
+        Hand hand = player.hands[(int)data.itemType];
+        hand.sprite.sprite = data.hand;
+        hand.gameObject.SetActive(true);       
 
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 모든 자식한테 applyGear 적용
     }

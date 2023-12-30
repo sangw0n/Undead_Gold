@@ -30,6 +30,8 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.instance.isLive) return;
+
         timer += Time.deltaTime;
         // Mathf.FloorToInt : 소수점 아래는 버리고 int형으로 바꿔주는 함수 
         // Ex : 10.5 -> 10 (1레벨) / 20.55 -> 20 ( 2레벨)
