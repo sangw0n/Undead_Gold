@@ -16,6 +16,8 @@ public class AchiveManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log(1 % 2);
+
         achives = (Achive[])Enum.GetValues(typeof(Achive));
         wait = new WaitForSecondsRealtime(5.0f);
 
@@ -90,6 +92,7 @@ public class AchiveManager : MonoBehaviour
     private IEnumerator NoticeRoutine()
     {
         uiNotice.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.sfx.LevelUp);
         yield return wait;
         uiNotice.SetActive(false);
     }

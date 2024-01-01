@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
@@ -104,6 +105,7 @@ public class Enemy : MonoBehaviour
         {
             // # Live, Hit Action
             anim.SetTrigger("Hit");
+            AudioManager.instance.PlaySfx(AudioManager.sfx.Hit);
         }
         else
         {
@@ -112,12 +114,15 @@ public class Enemy : MonoBehaviour
             coll.enabled = false;
             rigid.simulated = false; // 물리적 비활성화
             sprite.sortingOrder = 1;
+            anim.SetBool("Dead", true);
 
             // Exp && Kill
             GameManager.instance.kill++;
             GameManager.instance.GetExp();
 
-            anim.SetBool("Dead", true);
+            if(GameManager.instance.isLive)
+            AudioManager.instance.PlaySfx(AudioManager.sfx.Dead);
+
         }
     }
 }

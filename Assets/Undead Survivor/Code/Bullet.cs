@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
         this.damage = damage;
         this.per = per; 
 
-        if(per > -1) // 관통이 있으면 원거리 무기로 
+        if(per >= 0) // 관통이 있으면 원거리 무기로 
         {
             rigid.velocity = dir * 15.0f; // 일정한 방향으로 속도로 날아감
         }
@@ -41,11 +41,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (!trigger.CompareTag("Enemy") || per == -1) return;
+        if (!trigger.CompareTag("Enemy") || per == -100) return;
 
         // 관통
         per--;
-        if(per == -1)
+        if(per < 0)
         {
             rigid.velocity = Vector2.zero;
             gameObject.SetActive(false);

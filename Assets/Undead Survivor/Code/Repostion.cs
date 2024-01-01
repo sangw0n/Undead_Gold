@@ -21,21 +21,18 @@ public class Repostion : MonoBehaviour
         // # 나의 좌표 저장 
         Vector3 myPos = transform.position;
 
-        Vector3 playerDir = GameManager.instance.player.inputVec;
-        float dirX = playerPos.x - myPos.x;
-        float dirY = playerPos.y - myPos.y;
-
-        // # X축과 Y축 각각의 거리 
-        float diffX = Mathf.Abs(dirX);
-        float diffY = Mathf.Abs(dirY);
-
-        // # 이동 방향
-        dirX = dirX > -0.01f ? 1 : -1;
-        dirY = dirY > -0.01f ? 1 : -1;
-
         switch (transform.tag)
         {
             case "Ground":
+                // # X축과 Y축 각각의 거리 
+                float diffX = playerPos.x - myPos.x;
+                float diffY = playerPos.y - myPos.y;
+                // # 이동 방향
+                float dirX = diffX > 0 ? 1 : -1;
+                float dirY = diffY > 0 ? 1 : -1;
+                diffX = Mathf.Abs(diffX);
+                diffY = Mathf.Abs(diffY);
+
                 if (diffX > diffY)
                 {
                     // 수평이동
@@ -50,7 +47,9 @@ public class Repostion : MonoBehaviour
             case "Enemy":
                 if(coll.enabled)
                 {
-                    transform.Translate(playerDir * 20 + new Vector3(Random.Range(-3.0f, 3.0f),0.0f));
+                    Vector3 dist = playerPos - myPos;
+                    Vector3 random = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
+                    transform.Translate(random + dist * 2);
                 }
                 break;
         }

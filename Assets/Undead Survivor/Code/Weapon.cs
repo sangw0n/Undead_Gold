@@ -120,7 +120,7 @@ public class Weapon : MonoBehaviour
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
             // 근접은 관통이 필요없어서 -1 -> 무한
-            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero);
+            bullet.GetComponent<Bullet>().Init(damage, -100, Vector3.zero); // -100 is 무한
         }
     }
 
@@ -137,5 +137,7 @@ public class Weapon : MonoBehaviour
         // 지정된 축을 중심으로 목표를 향해 회전하는 함수
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         bullet.GetComponent<Bullet>().Init(damage, count, dir);
+
+        AudioManager.instance.PlaySfx(AudioManager.sfx.Range);
     }
 }
