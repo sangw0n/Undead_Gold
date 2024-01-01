@@ -46,7 +46,7 @@ public class LevelUp : MonoBehaviour
             ran[1] = Random.Range(0, items.Length);
             ran[2] = Random.Range(0, items.Length);
 
-            if (ran[0] != ran[1] && ran[1] != ran[2] && ran[3] != ran[1]) break;
+            if (ran[0] != ran[1] && ran[1] != ran[2] && ran[0] != ran[2]) break;
         }
 
         for(int index = 0; index < ran.Length; index++)
